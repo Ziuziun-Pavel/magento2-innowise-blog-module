@@ -1,2 +1,2 @@
-# magento2-innowise-blog-module
+# Innowise Blog extension
 Blog extension for Magento 2
