@@ -2,16 +2,16 @@
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="innowise_blog_post" resource="default" engine="innodb" comment="Innowise Blog Post Table">
-        <column xsi:type="smallint" name="post_id" unsigned="true" nullable="false" identity="false"
+        <column xsi:type="smallint" name="post_id" unsigned="true" nullable="false"
                 comment="Post ID"/>
         <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Post Title"/>
         <column xsi:type="varchar" name="url_key" nullable="true" length="255" comment="Post Url Key"/>
         <column xsi:type="mediumtext" name="content" nullable="true" comment="Post Content"/>
-        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" identity="false"
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false"
                 default="1" comment="Page Status"/>
-        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false"
                 comment="Store ID"/>
-        <column xsi:type="smallint" name="category_id" unsigned="true" nullable="false" identity="false"
+        <column xsi:type="smallint" name="category_id" unsigned="true" nullable="false"
                 comment="Category ID"/>
         <column xsi:type="text" name="tags" nullable="true" comment="Page tags"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
@@ -23,7 +23,7 @@
         </constraint>
     </table>
     <table name="innowise_blog_category" resource="default" engine="innodb" comment="Innowise Blog Category Table">
-        <column xsi:type="smallint" name="category_id" unsigned="false" nullable="false" identity="false"
+        <column xsi:type="smallint" name="category_id" unsigned="true" nullable="false"
                 comment="Category ID"/>
         <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Category Name"/>
         <column xsi:type="varchar" name="url_key" nullable="true" length="255" comment="Category Url Key"/>
@@ -38,9 +38,9 @@
         </constraint>
     </table>
     <table name="innowise_blog_post_store" resource="default" engine="innodb" comment="Innowise Blog Post To Store Linkage Table">
-        <column xsi:type="smallint" name="post_id" unsigned="true" nullable="false" identity="false"
+        <column xsi:type="smallint" name="post_id" unsigned="true" nullable="false"
                 comment="Entity ID"/>
-        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false"
                 comment="Store ID"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="post_id"/>
@@ -55,9 +55,9 @@
         </index>
     </table>
     <table name="innowise_blog_post_category" resource="default" engine="innodb" comment="Innowise Blog Post To Category Linkage Table">
-        <column xsi:type="smallint" name="post_id" unsigned="true" nullable="false" identity="false"
+        <column xsi:type="smallint" name="post_id" unsigned="true" nullable="false"
                 comment="Entity ID"/>
-        <column xsi:type="smallint" name="category_id" unsigned="false" nullable="false" identity="false"
+        <column xsi:type="smallint" name="category_id" unsigned="true" nullable="false"
                 comment="Category ID"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="post_id"/>

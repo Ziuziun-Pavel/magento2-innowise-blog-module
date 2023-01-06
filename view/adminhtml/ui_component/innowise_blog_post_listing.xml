@@ -154,20 +154,20 @@
                 <label translate="true">URL Key</label>
             </settings>
         </column>
-        <column name="store_id">
-            <settings>
-                <filter>textRange</filter>
-                <label translate="true">Store ID</label>
-                <sorting>asc</sorting>
-            </settings>
-        </column>
-        <column name="category_id">
-            <settings>
-                <filter>textRange</filter>
-                <label translate="true">Category ID</label>
-                <sorting>asc</sorting>
-            </settings>
-        </column>
+<!--        <column name="store_id">-->
+<!--            <settings>-->
+<!--                <filter>textRange</filter>-->
+<!--                <label translate="true">Store ID</label>-->
+<!--                <sorting>asc</sorting>-->
+<!--            </settings>-->
+<!--        </column>-->
+<!--        <column name="category_id">-->
+<!--            <settings>-->
+<!--                <filter>textRange</filter>-->
+<!--                <label translate="true">Category ID</label>-->
+<!--                <sorting>asc</sorting>-->
+<!--            </settings>-->
+<!--        </column>-->
         <column name="tags">
             <settings>
                 <filter>text</filter>
