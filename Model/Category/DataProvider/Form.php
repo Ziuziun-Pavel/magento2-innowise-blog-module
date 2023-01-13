@@ -6,7 +6,7 @@ namespace Innowise\Blog\Model\Category\DataProvider;
 
 use Innowise\Blog\Api\Data\CategoryInterface;
 use Innowise\Blog\Controller\Adminhtml\AbstractCategory;
-use InnowiseBlog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
+use Innowise\Blog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
