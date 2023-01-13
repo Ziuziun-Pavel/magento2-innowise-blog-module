@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Innowise\Blog\Model\ResourceModel\Post;
+namespace Innowise\Blog\Model\ResourceModel\Category;
 
-use Innowise\Blog\Model\Post as Model;
-use Innowise\Blog\Model\ResourceModel\Post\Post as ResourceModel;
+use Innowise\Blog\Model\Category as Model;
+use Innowise\Blog\Model\ResourceModel\Category\Category as ResourceModel;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection

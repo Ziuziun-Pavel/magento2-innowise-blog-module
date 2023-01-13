@@ -3,30 +3,30 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">innowise_blog_post_listing.innowise_blog_post_listing_data_source</item>
-            <item name="deps" xsi:type="string">innowise_blog_post_listing.innowise_blog_post_listing_data_source</item>
+            <item name="provider" xsi:type="string">innowise_blog_category_listing.innowise_blog_category_listing_data_source</item>
+            <item name="deps" xsi:type="string">innowise_blog_category_listing.innowise_blog_category_listing_data_source</item>
         </item>
-        <item name="spinner" xsi:type="string">innowise_blog_post_columns</item>
+        <item name="spinner" xsi:type="string">innowise_blog_category_columns</item>
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string" translate="true">Add Post</item>
+                <item name="label" xsi:type="string" translate="true">Add Category</item>
                 <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/post/new</item>
+                <item name="url" xsi:type="string">*/category/new</item>
             </item>
         </item>
     </argument>
-    <dataSource name="innowise_blog_post_listing_data_source">
+    <dataSource name="innowise_blog_category_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
-            <argument name="name" xsi:type="string">innowise_blog_post_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">post_id</argument>
+            <argument name="name" xsi:type="string">innowise_blog_category_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">category_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="update_url" xsi:type="url" path="mui/index/render"/>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">post_id</item>
+                        <item name="indexField" xsi:type="string">category_id</item>
                     </item>
                 </item>
             </argument>
@@ -65,7 +65,7 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">delete</item>
                         <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="*/post/massDelete">
+                        <item name="url" xsi:type="url" path="*/category/massDelete">
                             <param name="action">delete</param>
                         </item>
                         <item name="confirm" xsi:type="array">
@@ -78,18 +78,18 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="innowise_blog_post_columns">
+    <columns name="innowise_blog_category_columns">
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">10</item>
-                    <item name="indexField" xsi:type="string">post_id</item>
+                    <item name="indexField" xsi:type="string">category_id</item>
                 </item>
             </argument>
         </selectionsColumn>
 
-        <column name="post_id">
+        <column name="category_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">textRange</item>
@@ -146,12 +146,12 @@
             </argument>
         </column>
 
-        <actionsColumn name="actions" class="Innowise\Blog\Ui\Component\Listing\Column\Post\Action">
+        <actionsColumn name="actions" class="Innowise\Blog\Ui\Component\Listing\Column\Category\Action">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">107</item>
-                    <item name="indexField" xsi:type="string">post_id</item>
+                    <item name="indexField" xsi:type="string">category_id</item>
                     <item name="sortOrder" xsi:type="number">99</item>
                 </item>
             </argument>

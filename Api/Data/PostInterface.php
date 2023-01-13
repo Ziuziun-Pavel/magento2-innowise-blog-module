@@ -2,8 +2,6 @@
 
 namespace Innowise\Blog\Api\Data;
 
-use Magento\Tests\NamingConvention\true\string;
-
 interface PostInterface
 {
     /**
@@ -78,11 +76,11 @@ interface PostInterface
     /**
      * Set Post Store Id
      *
-     * @param int $storeId
+     * @param int[] $storeIds
      *
      * @return $this
      */
-    public function setStoreIds(int $storeId): PostInterface;
+    public function setStoreIds(array $storeIds): PostInterface;
 
     /**
      * Get Post Status
@@ -156,11 +154,11 @@ interface PostInterface
     public function getCategoryIds(): array;
 
     /**
-     * @param int[] $array
+     * @param int[] $categoryIds
      *
      * @return $this
      */
-    public function setCategoryIds(array $array): PostInterface;
+    public function setCategoryIds(array $categoryIds): PostInterface;
 
     /**
      * Get Post Tags
@@ -170,9 +168,11 @@ interface PostInterface
     public function getTags(): array;
 
     /**
-     * @param string[] $array
+     * Set Post Tags
+     *
+     * @param string[] $tags
      *
      * @return $this
      */
-    public function setTags(array $array): PostInterface;
+    public function setTags(array $tags): PostInterface;
 }

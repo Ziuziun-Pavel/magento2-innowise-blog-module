@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Innowise\Blog\Controller\Adminhtml\Post;
+namespace Innowise\Blog\Controller\Adminhtml\Category;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -26,7 +26,7 @@ class Index extends Action
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend((__('Posts')));
+        $resultPage->getConfig()->getTitle()->prepend((__('Categories')));
 
         return $resultPage;
     }

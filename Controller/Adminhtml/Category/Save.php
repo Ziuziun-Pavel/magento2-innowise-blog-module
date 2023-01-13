@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Innowise\Blog\Controller\Adminhtml\Post;
+namespace Innowise\Blog\Controller\Adminhtml\Category;
 
-use Innowise\Blog\Api\Data\PostInterface;
-use Innowise\Blog\Api\PostRepositoryInterface;
-use Innowise\Blog\Controller\Adminhtml\AbstractPost;
-use Innowise\Blog\Model\PostFactory as PostFactory;
+use Innowise\Blog\Api\Data\CategoryInterface;
+use Innowise\Blog\Api\CategoryRepositoryInterface;
+use Innowise\Blog\Controller\Adminhtml\AbstractCategory;
+use Innowise\Blog\Model\CategoryFactory as CategoryFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Exception\LocalizedException;
 
-class Save extends AbstractPost
+class Save extends AbstractCategory
 {
     /**
-     * @var PostFactory
+     * @var CategoryFactory
      */
-    private PostFactory $postFactory;
+    private CategoryFactory $categoryFactory;
 
     /**
-     * @var PostRepositoryInterface
+     * @var CategoryRepositoryInterface
      */
-    private PostRepositoryInterface $postRepository;
+    private CategoryRepositoryInterface $categoryRepository;
 
     /**
      * @var DataPersistorInterface
@@ -38,13 +38,13 @@ class Save extends AbstractPost
 
     public function __construct(
         Context $context,
-        PostFactory $postFactory,
+        CategoryFactory $categoryFactory,
         DataPersistorInterface $dataPersistor,
-        PostRepositoryInterface $postRepository,
+        CategoryRepositoryInterface $categoryRepository,
         DataObjectHelper $dataObjectHelper,
     ) {
-        $this->postFactory = $postFactory;
-        $this->postRepository = $postRepository;
+        $this->categoryFactory = $categoryFactory;
+        $this->categoryRepository = $categoryRepository;
         $this->dataPersistor = $dataPersistor;
         $this->dataObjectHelper = $dataObjectHelper;
 
@@ -58,20 +58,22 @@ class Save extends AbstractPost
 
         if ($data = $this->getRequest()->getPostValue()) {
             try {
-                $postId = isset($data[PostInterface::POST_ID]) ? (int)$data[PostInterface::POST_ID] : false;
-                $model = $postId
-                    ? $this->postRepository->getById($postId)
-                    : $this->postFactory->create();
+                $categoryId = isset($data[CategoryInterface::CATEGORY_ID])
+                    ? (int)$data[CategoryInterface::CATEGORY_ID]
+                    : false;
+                $model = $categoryId
+                    ? $this->categoryRepository->getById($categoryId)
+                    : $this->categoryFactory->create();
 
-                $this->dataObjectHelper->populateWithArray($model, $data, PostInterface::POST_ID);
-                $this->postRepository->save($model);
+                $this->dataObjectHelper->populateWithArray($model, $data, CategoryInterface::CATEGORY_ID);
+                $this->categoryRepository->save($model);
                 $this->dataPersistor->clear(self::DATA_PERSISTOR_KEY);
                 $this->messageManager->addSuccessMessage(__('You saved the item.'));
 
                 if ($this->getRequest()->getParam('back') == 'edit') {
                     return $this->resultRedirectFactory->create()->setPath(
                         '*/*/edit',
-                        [PostInterface::POST_ID => $model->getId()]
+                        [CategoryInterface::CATEGORY_ID => $model->getId()]
                     );
                 }
 
@@ -79,12 +81,17 @@ class Save extends AbstractPost
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the post'));
+                $this->messageManager->addExceptionMessage(
+                    $e,
+                    __('Something went wrong while saving the category')
+                );
             }
-            $this->dataPersistor->set(PostInterface::POST_ID, $data);
-            $postId = isset($data[PostInterface::POST_ID]) ? (int)$data[PostInterface::POST_ID] : false;
-            if ($postId) {
-                return $resultRedirect->setPath('*/*/edit', ['id' => $postId, '_current' => true]);
+            $this->dataPersistor->set(CategoryInterface::CATEGORY_ID, $data);
+            $categoryId = isset($data[CategoryInterface::CATEGORY_ID])
+                ? (int)$data[CategoryInterface::CATEGORY_ID]
+                : false;
+            if ($categoryId) {
+                return $resultRedirect->setPath('*/*/edit', ['id' => $categoryId, '_current' => true]);
             }
 
             return $resultRedirect->setPath('*/*/new', ['_current' => true]);

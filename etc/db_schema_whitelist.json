@@ -1,0 +1,60 @@
+{
+    "innowise_blog_post": {
+        "column": {
+            "post_id": true,
+            "title": true,
+            "url_key": true,
+            "content": true,
+            "status": true,
+            "store_id": true,
+            "category_id": true,
+            "tags": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "innowise_blog_category": {
+        "column": {
+            "category_id": true,
+            "title": true,
+            "url_key": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "innowise_blog_post_store": {
+        "column": {
+            "post_id": true,
+            "store_id": true
+        },
+        "index": {
+            "INNOWISE_BLOG_POST_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "INNOWISE_BLOG_POST_STORE_POST_ID_INNOWISE_BLOG_POST_POST_ID": true,
+            "INNOWISE_BLOG_POST_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "innowise_blog_post_category": {
+        "column": {
+            "post_id": true,
+            "category_id": true
+        },
+        "index": {
+            "INNOWISE_BLOG_POST_CATEGORY_CATEGORY_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "INNOWISE_BLOG_POST_CATEGORY_POST_ID_INNOWISE_BLOG_POST_POST_ID": true,
+            "INNOWISE_BLOG_POST_CTGR_CTGR_ID_INNOWISE_BLOG_CTGR_CTGR_ID": true
+        }
+    }
+}
