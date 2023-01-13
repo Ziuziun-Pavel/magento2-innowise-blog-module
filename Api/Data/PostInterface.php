@@ -2,41 +2,30 @@
 
 namespace Innowise\Blog\Api\Data;
 
+use Magento\Tests\NamingConvention\true\string;
+
 interface PostInterface
 {
     /**
      * Constants used as data array keys
      */
-    const POST_ID = 'post_id';
-    const TITLE = 'title';
-    const CONTENT = 'content';
-    const STORE_IDS = 'store_ids';
-    const STATUS = 'status';
-    const URL_KEY = 'url_key';
-    const UPDATED_AT = 'updated_at';
-    const CREATED_AT = 'created_at';
-    const CATEGORY_IDS = 'category_ids';
-    const TAGS = 'tags';
-
-    const ATTRIBUTES = [
-        self::POST_ID,
-        self::TITLE,
-        self::CONTENT,
-        self::STORE_IDS,
-        self::STATUS,
-        self::URL_KEY,
-        self::UPDATED_AT,
-        self::CREATED_AT,
-        self::CATEGORY_IDS,
-        self::TAGS,
-    ];
+    public const POST_ID = 'post_id';
+    public const POST_TITLE = 'title';
+    public const POST_CONTENT = 'content';
+    public const POST_STATUS = 'status';
+    public const POST_URL_KEY = 'url_key';
+    public const POST_CATEGORY_IDS = 'category_ids';
+    public const POST_TAGS = 'tags';
+    public const POST_STORE_IDS = 'store_ids';
+    public const POST_UPDATED_AT = 'updated_at';
+    public const POST_CREATED_AT = 'created_at';
 
     /**
      * Get Post id
      *
-     * @return int|null
+     * @return int
      */
-    public function getId();
+    public function getPostId(): int;
 
     /**
      * Set Post id
@@ -45,14 +34,14 @@ interface PostInterface
      *
      * @return $this
      */
-    public function setId($id);
+    public function setPostId(int $id): PostInterface;
 
     /**
      * Get Post Title
      *
-     * @return string/null
+     * @return string
      */
-    public function getTitle();
+    public function getTitle(): string;
 
     /**
      * Set Post Title
@@ -61,14 +50,14 @@ interface PostInterface
      *
      * @return $this
      */
-    public function setTitle($title);
+    public function setTitle(string $title): PostInterface;
 
     /**
      * Get Post Content
      *
-     * @return string/null
+     * @return string
      */
-    public function getContent();
+    public function getContent(): string;
 
     /**
      * Set Post Content
@@ -77,14 +66,14 @@ interface PostInterface
      *
      * @return $this
      */
-    public function setContent($content);
+    public function setContent(string $content): PostInterface;
 
     /**
      * Get Post Store Id
      *
-     * @return int/null
+     * @return int[]
      */
-    public function getStoreIds();
+    public function getStoreIds(): array;
 
     /**
      * Set Post Store Id
@@ -93,14 +82,14 @@ interface PostInterface
      *
      * @return $this
      */
-    public function setStoreIds($storeId);
+    public function setStoreIds(int $storeId): PostInterface;
 
     /**
      * Get Post Status
      *
-     * @return int/null
+     * @return int
      */
-    public function getStatus();
+    public function getStatus(): int;
 
     /**
      * Set Post Status
@@ -109,43 +98,46 @@ interface PostInterface
      *
      * @return $this
      */
-    public function setStatus($status);
+    public function setStatus(int $status): PostInterface;
 
     /**
      * Get Post Url Key
      *
-     * @return string/null
+     * @return string
      */
-    public function getUrlKey();
+    public function getUrlKey(): string;
 
     /**
      * Set Post Url Key
      *
-     * @param string $url
+     * @param string $urlKey
      *
      * @return $this
      */
-    public function setUrlKey($url);
+    public function setUrlKey(string $urlKey): PostInterface;
 
     /**
      * Get Post created date
-     * @return string|null
+     *
+     * @return string
      */
-    public function getCreatedAt();
+    public function getCreatedAt(): string;
 
     /**
+     * Set Category created date
+     *
      * @param string $createdAt
      *
      * @return $this
      */
-    public function setCreatedAt($createdAt);
+    public function setCreatedAt(string $createdAt): PostInterface;
 
     /**
      * Get Post updated date
      *
-     * @return string|null
+     * @return string
      */
-    public function getUpdatedAt();
+    public function getUpdatedAt(): string;
 
     /**
      * Set Post updated date
@@ -154,33 +146,33 @@ interface PostInterface
      *
      * @return $this
      */
-    public function setUpdatedAt($updatedAt);
+    public function setUpdatedAt(string $updatedAt): PostInterface;
 
     /**
      * Get Post Category Ids
      *
-     * @return int[]|null
+     * @return int[]
      */
-    public function getCategoryIds();
+    public function getCategoryIds(): array;
 
     /**
      * @param int[] $array
      *
      * @return $this
      */
-    public function setCategoryIds($array);
+    public function setCategoryIds(array $array): PostInterface;
 
     /**
      * Get Post Tags
      *
-     * @return int[]|null
+     * @return string[]
      */
-    public function getTags();
+    public function getTags(): array;
 
     /**
      * @param string[] $array
      *
      * @return $this
      */
-    public function setTags($array);
+    public function setTags(array $array): PostInterface;
 }
