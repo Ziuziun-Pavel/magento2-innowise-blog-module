@@ -15,4 +15,22 @@ class Post extends AbstractDb
     {
         $this->_init(self::POST_TABLE, PostInterface::POST_ID);
     }
+
+    protected function _getLoadSelect($field, $value, $object)
+    {
+        $select = parent::_getLoadSelect($field, $value, $object);
+
+        $select->join(
+            array('innowise_blog_post_category' => $this->getTable('innowise_blog_post_category')),
+            'innowise_blog_post.post_id=innowise_blog_post_category.category_id',
+            array());
+
+        $select->join(
+            array('innowise_blog_category'=>$this->getTable('innowise_blog_category')),
+            'innowise_blog_post.category_id=innowise_blog_category.category_id',
+            array());
+
+        return $select;
+    }
+
 }
