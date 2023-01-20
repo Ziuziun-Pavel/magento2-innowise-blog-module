@@ -14,27 +14,28 @@ abstract class Collection extends AbstractCollection
     public function _construct()
     {
         $this->_init(Model::class, ResourceModel::class);
+
+
     }
 
     protected function _afterLoad()
     {
         $select= $this->getSelect();
         $select->joinLeft(
-            array('innowise_blog_post_category'=>$this->getTable('innowise_blog_post_category')),
-            'innowise_blog_post.post_id=innowise_blog_post_category.category_id',
+            ['secondTable' => $this->getTable('innowise_blog_post_category')],
+            'main_table.post_id = secondTable.post_id',
+            array('*')
+        )->joinLeft(
+            ['thirdTable' => $this->getTable('innowise_blog_category')],
+            'secondTable.category_id = thirdTable.category_id',
             array('*')
         );
 
-        $select->joinLeft(
-            array('innowise_blog_category'=>$this->getTable('innowise_blog_category')),
-            'innowise_blog_post.category_id=innowise_blog_category.category_id',
-            array('*')
-        );
+
         foreach ($this as $item) {
 
             $categories = $this->getData('category_ids');
 
-            var_dump($categories);
             $item->setData('category_ids', $categories);
         }
 
