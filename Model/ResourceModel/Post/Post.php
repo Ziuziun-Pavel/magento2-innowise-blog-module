@@ -64,7 +64,6 @@ class Post extends AbstractDb
 
         return parent::_beforeSave($object);
     }
-
     protected function _afterLoad(\Magento\Framework\Model\AbstractModel $object)
     {
         if ($object->getId()) {
@@ -123,5 +122,4 @@ class Post extends AbstractDb
 
         return $adapter->fetchCol($select);
     }
-
 }
