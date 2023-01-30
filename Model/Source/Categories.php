@@ -2,40 +2,36 @@
 
 namespace Innowise\Blog\Model\Source;
 
-use Innowise\Blog\Model\ResourceModel\Post\CollectionFactory;
+use Innowise\Blog\Model\ResourceModel\Category\CollectionFactory;
+use Magento\Store\Model\StoreManagerInterface;
 
 class Categories implements \Magento\Framework\Option\ArrayInterface
 {
-    /**
-     * @var \Innowise\Blog\Model\ResourceModel\Post\CollectionFactory
-     */
-    protected $collectionFactory;
-
-    /**
-     * @param CollectionFactory $countryCollectionFactory
-     * @param array $options
-     */
     public function __construct(
-        CollectionFactory $countryCollectionFactory,
-    )
-    {
-        $this->collectionFactory = $countryCollectionFactory;
+        CollectionFactory $collectionFactory,
+        \Magento\Framework\ObjectManagerInterface $objectManager
+    ) {
+        $this->_collectionFactory = $collectionFactory;
+        $this->_objectManager = $objectManager;
     }
-    /**
-     * get options as key value pair
-     *
-     * @return array
-     */
+
+
     public function toOptionArray()
     {
-        $collection = $this->collectionFactory->create();
-        $options = [];
-        foreach ($collection->getData('category_ids') as $value => $val) {
-            $options[] = [
-                'value' => $value,
-                'label' => $value
-            ];
-            return $options;
-        }
+        $attributes = $this->getAttributes();
+        return  $attributes;
     }
+
+
+
+    public function getAttributes() {
+        $collection = $this->_collectionFactory->create();
+        $attr_groups = array();
+        foreach ($collection as $item) {
+            $attr_groups[] = ['value' => $item->getData()['category_id'], 'label' => $item->getData()['category_id']];
+        }
+
+        return $attr_groups;
+    }
+
 }

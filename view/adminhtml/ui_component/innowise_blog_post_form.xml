@@ -137,12 +137,11 @@
         </field>
         <field name="tags">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Innowise\Blog\Model\Source\Tags</item>
                 <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string" translate="true">Tags</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
                     <item name="dataScope" xsi:type="string">tags</item>
                     <item name="source" xsi:type="string">blog_posts</item>
                     <item name="validation" xsi:type="array">
@@ -160,7 +159,7 @@
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">int</item>
                     <item name="formElement" xsi:type="string">multiselect</item>
-                    <item name="dataScope" xsi:type="string">category_id</item>
+                    <item name="dataScope" xsi:type="string">category_ids</item>
                     <item name="source" xsi:type="string">blog_posts</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>

@@ -83,7 +83,7 @@
             <column name="category_id"/>
         </index>
     </table>
-    <table name="innowise_blog_post_tags" resource="default" engine="innodb" comment="Innowise Blog Post To Tags Linkage Table">
+    <table name="innowise_blog_post_tag" resource="default" engine="innodb" comment="Innowise Blog Post To Tags Linkage Table">
         <column xsi:type="smallint" name="post_id" unsigned="false" nullable="false" identity="false"
                 comment="Entity ID"/>
         <column xsi:type="smallint" name="tag_id" unsigned="false" nullable="false" identity="false"
