@@ -3,18 +3,16 @@
 namespace Innowise\Blog\Model\Source;
 
 use Innowise\Blog\Model\ResourceModel\Category\CollectionFactory;
-use Magento\Store\Model\StoreManagerInterface;
 
 class Categories implements \Magento\Framework\Option\ArrayInterface
 {
-    public function __construct(
-        CollectionFactory $collectionFactory,
-        \Magento\Framework\ObjectManagerInterface $objectManager
-    ) {
-        $this->_collectionFactory = $collectionFactory;
-        $this->_objectManager = $objectManager;
-    }
+    protected CollectionFactory $collectionFactory;
 
+    public function __construct(
+        CollectionFactory $collectionFactory
+    ) {
+        $this->collectionFactory = $collectionFactory;
+    }
 
     public function toOptionArray()
     {
@@ -22,16 +20,13 @@ class Categories implements \Magento\Framework\Option\ArrayInterface
         return  $attributes;
     }
 
-
-
-    public function getAttributes() {
-        $collection = $this->_collectionFactory->create();
-        $attr_groups = array();
+    private function getAttributes() {
+        $collection = $this->collectionFactory->create();
+        $attr_groups = [];
         foreach ($collection as $item) {
             $attr_groups[] = ['value' => $item->getData()['category_id'], 'label' => $item->getData()['category_id']];
         }
 
         return $attr_groups;
     }
-
 }
