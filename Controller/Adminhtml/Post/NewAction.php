@@ -13,7 +13,7 @@ class NewAction extends Action
     /**
      * @var ForwardFactory
      */
-    protected ForwardFactory $resultForwardFactory;
+    private ForwardFactory $resultForwardFactory;
 
     public function __construct(
         Context $context,

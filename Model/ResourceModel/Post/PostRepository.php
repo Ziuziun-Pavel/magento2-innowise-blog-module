@@ -160,29 +160,4 @@ class PostRepository implements PostRepositoryInterface
 
         return $object;
     }
-//    public function getCategoriesByPostId(int $postId): PostCollection
-//    {
-//
-//        $collection = $this->collectionFactory->create();
-//        $tableName = $collection->getTable('innowise_blog_post');
-//        $collection
-//            ->addFieldToFilter(
-//                'innowise_blog_post.post_id',
-//                $postId
-//            )
-//            ->getSelect()
-//            ->joinLeft(
-//                ['innowise_blog_post_category' => $tableName],
-//                'main_table.post_id = innowise_blog_post_category.post_id'
-//            )
-//            ->joinLeft(
-//                ['innowise_blog_post_category' => $tableName],
-//                'innowise_blog_post_category.category_id = innowise_blog_category.category_id'
-//            )
-//        ;
-//
-//        return $collection;
-//    }
-
-
 }

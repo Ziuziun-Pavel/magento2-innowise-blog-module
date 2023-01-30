@@ -3,6 +3,7 @@
 namespace Innowise\Blog\Model\Source;
 
 use Innowise\Blog\Model\ResourceModel\Post\CollectionFactory;
+
 class Categories implements \Magento\Framework\Option\ArrayInterface
 {
     /**
@@ -20,7 +21,6 @@ class Categories implements \Magento\Framework\Option\ArrayInterface
     {
         $this->collectionFactory = $countryCollectionFactory;
     }
-
     /**
      * get options as key value pair
      *

@@ -29,17 +29,17 @@ class GenericButton
         $this->request = $context->getRequest();
     }
 
-    public function getUrl($route = '', $params = []): string
+    protected function getUrl($route = '', $params = []): string
     {
         return $this->urlBuilder->getUrl($route, $params);
     }
 
-    public function getPostId(): int
+    protected function getPostId(): int
     {
         return (int)$this->request->getParam(PostInterface::POST_ID);
     }
 
-    public function getCategoryId(): int
+    protected function getCategoryId(): int
     {
         return (int)$this->request->getParam(CategoryInterface::CATEGORY_ID);
     }
