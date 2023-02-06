@@ -16,17 +16,20 @@ class Categories implements \Magento\Framework\Option\ArrayInterface
 
     public function toOptionArray()
     {
-        $attributes = $this->getAttributes();
-        return  $attributes;
-    }
-
-    private function getAttributes() {
-        $collection = $this->collectionFactory->create();
-        $attr_groups = [];
-        foreach ($collection as $item) {
-            $attr_groups[] = ['value' => $item->getData()['category_id'], 'label' => $item->getData()['category_id']];
+        $result = [];
+        foreach ($this->getOptions() as $value => $label) {
+            $result[] = [
+                'value' => $label['category_id'],
+                'label' => $label['title'],
+            ];
         }
 
-        return $attr_groups;
+        return $result;
+    }
+
+    public function getOptions()
+    {
+        $data = $this->collectionFactory->create();
+        return $data->getData();
     }
 }

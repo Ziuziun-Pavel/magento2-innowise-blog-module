@@ -55,7 +55,6 @@ class Post extends AbstractDb
         return parent::_afterSave($post);
     }
 
-
     /**
      * @param PostInterface $model
      *

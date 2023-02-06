@@ -2,11 +2,17 @@
 
 namespace Innowise\Blog\Model\Source;
 
-use Innowise\Blog\Model\ResourceModel\Category\CollectionFactory;
+use Innowise\Blog\Model\ResourceModel\Post\CollectionFactory;
+use Magento\Framework\Option\ArrayInterface;
 
-class Tags implements \Magento\Framework\Option\ArrayInterface
+class Tags implements ArrayInterface
 {
-    protected CollectionFactory $collectionFactory;
+    protected $collectionFactory;
+
+    /**
+     * @var array|null
+     */
+    protected $options;
 
     public function __construct(
         CollectionFactory $collectionFactory
@@ -16,17 +22,20 @@ class Tags implements \Magento\Framework\Option\ArrayInterface
 
     public function toOptionArray()
     {
-        $attributes = $this->getAttributes();
-        return  $attributes;
-    }
-
-    private function getAttributes() {
-        $collection = $this->collectionFactory->create();
-        $attr_groups = [];
-        foreach ($collection as $item) {
-            $attr_groups[] = ['value' => $item->getData()['category_id'], 'label' => $item->getData()['category_id']];
+        $result = [];
+        foreach ($this->getOptions() as $value => $label) {
+            $result[] = [
+                'value' => $label['tag_id'],
+                'label' => $label['name'],
+            ];
         }
 
-        return $attr_groups;
+        return $result;
+    }
+
+    public function getOptions()
+    {
+        $data = $this->collectionFactory->create();
+        return $data->getData();
     }
 }
