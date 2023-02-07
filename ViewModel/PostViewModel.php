@@ -26,9 +26,9 @@ class PostViewModel implements ArgumentInterface
         $this->requestInterface = $requestInterface;
     }
 
-    public function getDetail()
+    public function getPost()
     {
-        $id = (int) $this->requestInterface->getParam('post_id');
+        $id = (int) $this->requestInterface->getParam('id');
 
         return $this->postRepositoryInterface->getById($id);
     }

@@ -6,9 +6,10 @@ use Magento\Framework\View\Element\Template;
 /** @var Template $block */
 $postViewModel = $block->getData('post_view_model');
 $post = $block->getData('post');
+
 ?>
 
-<a href="<?= $block->getUrl('blog/post/detail', ['id' => $post->getData('post_id')]) ?>">
+<a href="<?= $block->getUrl('blog/post/view', ['id' => $post->getData('post_id')]) ?>">
     <h3><?= $post->getData('title'); ?></h3>
 </a>
 <p>

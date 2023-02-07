@@ -6,7 +6,8 @@
  */
 $postViewModel = $block->getData('post_view_model');
 
-$post = $block->getData('post');
+$post = $postViewModel->getPost();
+
 
 ?>
 <div class="blog_post_view">

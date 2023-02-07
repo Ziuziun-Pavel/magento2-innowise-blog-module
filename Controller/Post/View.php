@@ -1,6 +1,6 @@
 <?php
 
-namespace Rsgitech\News\Controller\Index;
+namespace Innowise\Blog\Controller\Post;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
 
