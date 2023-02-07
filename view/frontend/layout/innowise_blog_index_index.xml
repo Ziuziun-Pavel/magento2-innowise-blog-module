@@ -1,6 +1,23 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Innowise_Blog::styles/blog.css"/>
+    </head>
     <body>
+        <referenceContainer name="logo" remove="true" />
+        <referenceContainer name="header.container">
+            <referenceBlock name="top.search" remove="true"/>
+            <referenceBlock name="minicart" remove="true"/>
+            <block name="innowise_blog_nav"
+                   template="Innowise_Blog::nav_bar.phtml"
+                   cacheable="false">
+                <arguments>
+                    <argument name="category_view_model" xsi:type="object">Innowise\Blog\ViewModel\CategoryViewModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="sidebar.main" remove="true"/>
+        <referenceBlock name="sidebar.additional" remove="true"/>
         <referenceBlock name="page.main.title">
             <action method="setPageTitle">
                 <argument name="title" translate="true" xsi:type="string">Blog</argument>

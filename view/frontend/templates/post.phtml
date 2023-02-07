@@ -9,11 +9,15 @@ $post = $block->getData('post');
 
 ?>
 
-<a href="<?= $block->getUrl('blog/post/view', ['id' => $post->getData('post_id')]) ?>">
-    <h3><?= $post->getData('title'); ?></h3>
-</a>
-<p>
-    <span class="author">Pavel Ziuziun</span>
-    <span class="published-date"><?= $block->formatDate($post->getData('created_at')); ?></span>
-</p>
-<p><?= $post->getData('content'); ?></p>
+<div class="post-wrapper">
+    <a href="<?= $block->getUrl('blog/post/view', ['id' => $post->getData('post_id')]) ?>">
+        <h3><?= $post->getData('title'); ?></h3>
+    </a>
+    <p>
+        <span class="author">Pavel Ziuziun</span>
+        <span class="published-date"><?= $block->formatDate($post->getData('created_at')); ?></span>
+    </p>
+    <p><?= $post->getData('content'); ?></p>
+</div>
+
+

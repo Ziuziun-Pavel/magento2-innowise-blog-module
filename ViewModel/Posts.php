@@ -11,6 +11,7 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Theme\Block\Html\Pager;
 use Magento\Framework\View\Element\Template;
+
 class Posts implements ArgumentInterface
 {
     public function __construct(

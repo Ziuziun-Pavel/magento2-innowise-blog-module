@@ -9,6 +9,7 @@ $collection = $postsViewModel->getPosts(2);
 $pagerBlock = $block->getChildBlock('blog_pager');
 
 $postBlock = $block->getChildBlock('post');
+
 ?>
 <?php if (!$collection->count()): ?>
     <p>There are no posts in this blog.</p>

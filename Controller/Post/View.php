@@ -19,4 +19,3 @@ class View implements HttpGetActionInterface
         return $this->pageFactory->create();
     }
 }
-?>
