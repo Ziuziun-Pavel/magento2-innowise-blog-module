@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="innowise_blog_post" resource="default" engine="innodb" comment="Innowise Blog Post Table">
+        <column xsi:type="smallint" name="post_id" unsigned="false" nullable="false" identity="true"
+                comment="Post ID"/>
+        <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Post Title"/>
+        <column xsi:type="varchar" name="url_key" nullable="true" length="255" comment="Post Url Key"/>
+        <column xsi:type="mediumtext" name="content" nullable="true" comment="Post Content"/>
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false"
+                default="1" comment="Page Status"/>
+        <column xsi:type="smallint" name="store_ids" unsigned="true" nullable="false"
+                comment="Store ID"/>
+        <column xsi:type="smallint" name="category_ids" unsigned="true" nullable="false"
+                comment="Category ID"/>
+        <column xsi:type="text" name="tags" nullable="true" comment="Page tags"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Post Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Post Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+        </constraint>
+    </table>
+    <table name="innowise_blog_category" resource="default" engine="innodb" comment="Innowise Blog Category Table">
+        <column xsi:type="smallint" name="category_id" unsigned="false" nullable="false" identity="true"
+                comment="Category ID"/>
+        <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Category Title"/>
+        <column xsi:type="varchar" name="url_key" nullable="true" length="255" comment="Category Url Key"/>
+        <column xsi:type="smallint" name="status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Category Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Category Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Category Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+        </constraint>
+    </table>
+    <table name="innowise_blog_tag" resource="default" engine="innodb" comment="Innowise Blog Tag Table">
+        <column xsi:type="smallint" name="tag_id" unsigned="false" nullable="false" identity="true"
+                comment="Tag ID"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Tag Name"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Tag Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Tag Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="tag_id"/>
+        </constraint>
+    </table>
+    <table name="innowise_blog_post_store" resource="default" engine="innodb" comment="Innowise Blog Post To Store Linkage Table">
+        <column xsi:type="smallint" name="post_id" unsigned="false" nullable="false" identity="false"
+                comment="Entity ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="INNOWISE_BLOG_POST_STORE_POST_ID_INNOWISE_BLOG_POST_POST_ID" table="innowise_blog_post_store"
+                    column="post_id" referenceTable="innowise_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="INNOWISE_BLOG_POST_STORE_STORE_ID_STORE_STORE_ID" table="innowise_blog_post_store"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="INNOWISE_BLOG_POST_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="innowise_blog_post_category" resource="default" engine="innodb" comment="Innowise Blog Post To Category Linkage Table">
+        <column xsi:type="smallint" name="post_id" unsigned="false" nullable="false" identity="false"
+                comment="Entity ID"/>
+        <column xsi:type="smallint" name="category_id" unsigned="false" nullable="false" identity="false"
+                comment="Category ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+            <column name="category_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="INNOWISE_BLOG_POST_CATEGORY_POST_ID_INNOWISE_BLOG_POST_POST_ID" table="innowise_blog_post_category"
+                    column="post_id" referenceTable="innowise_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="INNOWISE_BLOG_POST_CATEGORY_CATEGORY_ID_CATEGORY_CATEGORY_ID" table="innowise_blog_post_category"
+                    column="category_id" referenceTable="innowise_blog_category" referenceColumn="category_id" onDelete="CASCADE"/>
+        <index referenceId="INNOWISE_BLOG_POST_CATEGORY_CATEGORY_ID" indexType="btree">
+            <column name="category_id"/>
+        </index>
+    </table>
+    <table name="innowise_blog_post_tag" resource="default" engine="innodb" comment="Innowise Blog Post To Tags Linkage Table">
+        <column xsi:type="smallint" name="post_id" unsigned="false" nullable="false" identity="false"
+                comment="Entity ID"/>
+        <column xsi:type="smallint" name="tag_id" unsigned="false" nullable="false" identity="false"
+                comment="Tag ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+            <column name="tag_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="INNOWISE_BLOG_POST_TAG_POST_ID_INNOWISE_BLOG_POST_POST_ID" table="innowise_blog_post_tag"
+                    column="post_id" referenceTable="innowise_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="INNOWISE_BLOG_POST_TAG_TAG_ID_TAG_TAG_ID" table="innowise_blog_post_tag"
+                    column="tag_id" referenceTable="innowise_blog_tag" referenceColumn="tag_id" onDelete="CASCADE"/>
+        <index referenceId="INNOWISE_BLOG_POST_TAG_TAG_ID" indexType="btree">
+            <column name="tag_id"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Innowise_Blog::menu"
+             title="Innowise Blog"
+             module="Innowise_Blog"
+             sortOrder="68"
+             resource="Innowise_Blog::menu"/>
+        <add id="Innowise_Blog::post"
+             title="Posts"
+             module="Innowise_Blog"
+             sortOrder="10"
+             resource="Innowise_Blog::post"
+             action="innowise_blog/post/index"
+             parent="Innowise_Blog::menu"/>
+        <add id="Innowise_Blog::category"
+             title="Categories"
+             module="Innowise_Blog"
+             sortOrder="20"
+             resource="Innowise_Blog::category"
+             action="innowise_blog/category/index"
+             parent="Innowise_Blog::menu"/>
+    </menu>
+</config>
