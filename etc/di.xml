@@ -13,6 +13,17 @@
     <preference for="Innowise\Blog\Api\CategoryRepositoryInterface"
                 type="Innowise\Blog\Model\ResourceModel\Category\CategoryRepository"/>
 
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="standart" xsi:type="array">
+                    <item name="class" xsi:type="string">Innowise\Blog\Controller\Router</item>
+                    <item name="sortOrder" xsi:type="string">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">

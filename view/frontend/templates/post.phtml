@@ -10,7 +10,7 @@ $post = $block->getData('post');
 ?>
 
 <div class="post-wrapper">
-    <a href="<?= $block->getUrl('blog/post/view', ['id' => $post->getData('post_id')]) ?>">
+    <a href="<?= $block->getUrl('blog/post/view', ['url_key' => $post->getData('url_key')]) ?>">
         <h3><?= $post->getData('title'); ?></h3>
     </a>
     <p>

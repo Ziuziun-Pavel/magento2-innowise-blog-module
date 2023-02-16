@@ -15,6 +15,7 @@ use Innowise\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Innowise\Blog\Model\ResourceModel\Post\Post as PostResourceModel;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
+use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
@@ -72,7 +73,9 @@ class PostRepository implements PostRepositoryInterface
         DataObjectHelper $dataObjectHelper,
         JoinProcessorInterface $extensionAttributesJoinProcessor,
         CollectionProcessorInterface $collectionProcessor,
-        DataObjectProcessor $dataObjectProcessor
+        DataObjectProcessor $dataObjectProcessor,
+        private SearchCriteriaBuilder $searchCriteriaBuilder
+
     ) {
         $this->searchResultsFactory = $searchResultsFactory;
         $this->postResource = $postResource;
@@ -83,6 +86,20 @@ class PostRepository implements PostRepositoryInterface
         $this->collectionProcessor = $collectionProcessor;
         $this->dataObjectProcessor = $dataObjectProcessor;
     }
+
+    public function getByUrlKey(string $url_key): PostInterface
+    {
+        $searchCriteria = $this->searchCriteriaBuilder->create();
+        $posts = $this->getList($searchCriteria);
+
+        foreach ($posts->getItems() as $post) {
+            if ($post->getUrlKey() == $url_key) {
+                return $post;
+            }
+        }
+        throw new NoSuchEntityException(__('Unable to find entity with ID "%1"', $url_key));
+    }
+
 
     public function getById(int $postId): PostInterface
     {
