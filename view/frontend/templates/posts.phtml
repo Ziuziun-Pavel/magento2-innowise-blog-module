@@ -14,7 +14,7 @@ $postBlock = $block->getChildBlock('post');
 <?php if (!$collection->getTotalCount()): ?>
     <p>There are no posts in this blog.</p>
 <?php else: ?>
-    <?php foreach ($collection as $post): ?>
+        <?php foreach ($collection->getItems() as $post): ?>
         <?= $postsViewModel->getPostHtml($postBlock, $post); ?>
     <?php endforeach; ?>
     <?php if ($pagerBlock): ?>

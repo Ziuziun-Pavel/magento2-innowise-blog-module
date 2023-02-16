@@ -1,13 +1,16 @@
 <?php
 namespace Innowise\Blog\Block\Html;
 
-use Magento\Framework\Api\SearchResultsInterface;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Theme\Block\Html\Pager;
-use Magento\Framework\Data\Collection;
 
 class CustomPager extends Pager
 {
+    /**
+     * @var \Innowise\Blog\Api\Data\PostSearchResultsInterface
+     */
+    protected $collection;
+
     public function __construct(
         Context $context,
         array $data = []
@@ -15,41 +18,50 @@ class CustomPager extends Pager
         parent::__construct($context, $data);
     }
 
+    /**
+     * Set the collection for the pager.
+     *
+     * @param \Innowise\Blog\Api\Data\PostSearchResultsInterface $collection
+     * @return $this
+     */
     public function setCollection($collection)
     {
-        if ($collection instanceof \Innowise\Blog\Api\Data\PostSearchResultsInterface) {
-            $this->_collection = $collection->getItems();
-            $this->setTotalNum($collection->getTotalCount());
-        } elseif ($collection instanceof \Magento\Framework\Api\SearchResults) {
-            $this->_collection = $collection->getItems();
-            $this->setTotalNum($collection->getTotalCount());
-        } else {
-            parent::setCollection($collection);
-        }
-
+        $this->collection = $collection;
         return $this;
     }
 
-    protected function _prepareLayout()
+    /**
+     * Get the collection for the pager.
+     *
+     * @return \Innowise\Blog\Api\Data\PostSearchResultsInterface
+     */
+    public function getCollection()
     {
-        $collection = $this->getCollection();
-        if ($collection instanceof \Innowise\Blog\Api\Data\PostSearchResultsInterface) {
-            $this->setCurrentPage($collection->getSearchCriteria()->getCurrentPage());
-            $this->setTotalNum($collection->getTotalCount());
-            $this->setPageSize($collection->getPageSize());
-        } else {
-            parent::_prepareLayout();
-        }
+        return $this->collection;
     }
 
-    public function getCollection($collection = null)
+    /**
+     * Override the toHtml method to use a custom template.
+     *
+     * @return string
+     */
+    public function toHtml()
     {
-        if ($collection !== null) {
-            $this->_collection = $collection;
-        }
-        if ($this->_collection instanceof \Innowise\Blog\Api\Data\PostSearchResultsInterface) {
-            $this->_collection = $this->_collection->getItems();
-        }
-        return parent::getCollection();
+        $this->setTemplate('Innowise_Blog::custom_pager.phtml');
+        return parent::toHtml();
     }
+
+    /**
+     * Get last page number
+     *
+     * @return int
+     */
+    public function getLastPageNum()
+    {
+        $pageSize = count($this->getCollection()->getItems());
+        $totalCount = $this->getCollection()->getTotalCount();
+
+        return ceil($totalCount / $pageSize);
+    }
+
 }

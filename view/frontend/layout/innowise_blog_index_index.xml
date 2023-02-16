@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Innowise_Blog::styles/blog.css"/>
+        <css src="Innowise_Blog::css/source/blog.css"/>
+        <css src="Innowise_Blog::css/source/custom-pager.css"/>
     </head>
     <body>
         <referenceContainer name="logo" remove="true" />
@@ -28,7 +29,7 @@
                 <arguments>
                     <argument name="posts_view_model" xsi:type="object">Innowise\Blog\ViewModel\Posts</argument>
                 </arguments>
-                <block class="Magento\Theme\Block\Html\Pager" as="blog_pager" />
+                <block class="Innowise\Blog\Block\Html\CustomPager" as="blog_pager" template="Innowise_Blog::custom_pager.phtml" />
                 <block template="Innowise_Blog::post.phtml" as="post" >
                     <arguments>
                         <argument name="post_view_model" xsi:type="object">Innowise\Blog\ViewModel\PostViewModel</argument>

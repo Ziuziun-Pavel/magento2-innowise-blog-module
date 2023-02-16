@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Innowise\Blog\ViewModel;
 
-use Innowise\Blog\Model\ResourceModel\Post\Collection;
 use Innowise\Blog\Service\PostsProvider;
 use Innowise\Blog\Model\Post;
 use Magento\Framework\App\RequestInterface;

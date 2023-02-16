@@ -1,0 +1,35 @@
+.pager {
+    margin-top: 10px;
+    text-align: center;
+
+    .pagination {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+
+        .page-item {
+            display: inline-block;
+            margin: 0 5px;
+
+            &.active {
+                .page-link {
+                    background-color: #0074bd;
+                    border-color: #0074bd;
+                    color: #fff;
+                }
+            }
+
+            .page-link {
+                border: 1px solid #ddd;
+                color: #0074bd;
+                padding: 5px 10px;
+
+                &:hover {
+                    background-color: #0074bd;
+                    border-color: #0074bd;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
