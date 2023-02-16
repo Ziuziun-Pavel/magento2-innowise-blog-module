@@ -1,48 +1,46 @@
 <?php
+declare(strict_types=1);
+
 namespace Innowise\Blog\Controller;
 
+use Innowise\Blog\Service\PostIdChecker;
+use Magento\Framework\App\Action\Forward;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\DataObject;
-use Magento\Framework\Event\ManagerInterface;
-use Magento\Framework\UrlInterface;
-
 class Router implements \Magento\Framework\App\RouterInterface
 {
-    protected $actionFactory;
-    protected $eventManager;
-    protected $url;
-
-    public function __construct(ActionFactory $actionFactory, ManagerInterface $eventManager, UrlInterface $url)
-    {
-        $this->actionFactory = $actionFactory;
-        $this->eventManager = $eventManager;
-        $this->url = $url;
-    }
+    public function __construct(
+        private PostIdChecker $postIdChecker,
+        private ActionFactory $actionFactory
+    )
+    { }
 
     public function match(RequestInterface $request)
     {
-        $identifier = trim($request->getPathInfo(), '/');
-        $parts = explode('/', $identifier);
+        $pathInfo = trim($request->getPathInfo(), '/');
+        $parts = explode('/', $pathInfo);
+        var_dump($pathInfo);
 
-        var_dump($parts);
-
-        if (count($parts) == 1 && $parts[0] == 'blog') {
-            $request->setModuleName('Innowise_Blog')
-                ->setControllerName('index')
-                ->setActionName('index');
-            return $this->actionFactory->create(\Magento\Framework\App\Action\Forward::class);
+        if (!empty($parts[0]) && $parts[0] === 'blog' && !empty($parts[1])) {
+           $urlKey = $parts[1];
+        } else {
+            return null;
         }
 
-        if (count($parts) == 2 && $parts[0] == 'blog') {
-            $request->setModuleName('Innowise_Blog')
-                ->setControllerName('post')
-                ->setActionName('view')
-                ->setParam('url_key', $parts[1]);
-            return $this->actionFactory->create(\Magento\Framework\App\Action\Forward::class);
+        $postId = $this->postIdChecker->checkUrlKey($urlKey);
+
+        if (!$postId) {
+            return null;
         }
 
-        return null;
+        $request->setModuleName('blog')
+            ->setControllerName('post')
+            ->setActionName('view')
+            ->setParam('post_id', $postId);
+
+//        $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $pathInfo);
+        $request->setPathInfo($urlKey);
+
+        return $this->actionFactory->create(Forward::class);
     }
 }

@@ -7,7 +7,8 @@ namespace Innowise\Blog\ViewModel;
 use Innowise\Blog\Api\PostRepositoryInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-
+use Innowise\Blog\Model\Post;
+use Magento\Framework\UrlInterface;
 class PostViewModel implements ArgumentInterface
 {
     private $postRepositoryInterface;
@@ -15,6 +16,7 @@ class PostViewModel implements ArgumentInterface
     public function __construct(
         PostRepositoryInterface $postRepositoryInterface,
         RequestInterface $requestInterface,
+        private UrlInterface $url
     ) {
         $this->postRepositoryInterface = $postRepositoryInterface;
         $this->requestInterface = $requestInterface;
@@ -22,8 +24,13 @@ class PostViewModel implements ArgumentInterface
 
     public function getPost()
     {
-        $url_key = (string) $this->requestInterface->getParam('url_key');
+        $id = (int) $this->requestInterface->getParam('post_id');
 
-        return $this->postRepositoryInterface->getByUrlKey($url_key);
+        return $this->postRepositoryInterface->getById($id);
+    }
+
+    public function getPostUrl(Post $post): string
+    {
+        return $this->url->getBaseUrl() . 'blog/' . $post->getData('url_key');
     }
 }

@@ -35,7 +35,7 @@ interface PostRepositoryInterface
      * @return int
      * @throws NoSuchEntityException
      */
-    public function getByUrlKey(string $url_key): PostInterface;
+    public function getByUrlKey(string $url_key): int;
 
     /**
      * Retrieve posts matching the specified criteria.

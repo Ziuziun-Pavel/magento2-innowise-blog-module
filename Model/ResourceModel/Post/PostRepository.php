@@ -87,14 +87,14 @@ class PostRepository implements PostRepositoryInterface
         $this->dataObjectProcessor = $dataObjectProcessor;
     }
 
-    public function getByUrlKey(string $url_key): PostInterface
+    public function getByUrlKey(string $url_key): int
     {
         $searchCriteria = $this->searchCriteriaBuilder->create();
         $posts = $this->getList($searchCriteria);
 
         foreach ($posts->getItems() as $post) {
             if ($post->getUrlKey() == $url_key) {
-                return $post;
+                return $post->getPostId();
             }
         }
         throw new NoSuchEntityException(__('Unable to find entity with ID "%1"', $url_key));
