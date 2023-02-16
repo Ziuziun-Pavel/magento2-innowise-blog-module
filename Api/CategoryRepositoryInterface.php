@@ -37,7 +37,7 @@ interface CategoryRepositoryInterface
      * @return CategorySearchResultsInterface
      * @throws LocalizedException
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): Data\CategorySearchResultsInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria):  CategorySearchResultsInterface|\Magento\Framework\Api\SearchResults;
 
     /**
      * Delete category.

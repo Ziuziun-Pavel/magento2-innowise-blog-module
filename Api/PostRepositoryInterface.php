@@ -37,7 +37,7 @@ interface PostRepositoryInterface
      * @return PostSearchResultsInterface
      * @throws LocalizedException
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): Data\PostSearchResultsInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria): PostSearchResultsInterface|\Magento\Framework\Api\SearchResults;
 
     /**
      * Delete post.

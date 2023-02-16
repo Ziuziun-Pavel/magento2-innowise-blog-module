@@ -20,7 +20,7 @@ class Posts implements ArgumentInterface
     )
     { }
 
-    public function getPosts(int $limit): Collection
+    public function getPosts(int $limit): \Innowise\Blog\Api\Data\PostSearchResultsInterface|\Magento\Framework\Api\SearchResults
     {
         return $this->postsProvider->getPosts($limit, $this->getCurrentPage());
     }
@@ -30,13 +30,13 @@ class Posts implements ArgumentInterface
         return (int) $this->request->getParam('p');
     }
 
-    public function getPager(Collection $collection, Pager $pagerBlock): string
+    public function getPager($collection, Pager $pagerBlock): string
     {
         $pagerBlock->setUseContainer(false)
             ->setShowPerPage(false)
             ->setShowAmount(false)
             ->setFrameLength(3)
-            ->setLimit($collection->getPageSize())
+            ->setLimit($collection->getTotalCount())
             ->setCollection($collection);
 
         return $pagerBlock->toHtml();

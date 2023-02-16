@@ -11,7 +11,7 @@ $pagerBlock = $block->getChildBlock('blog_pager');
 $postBlock = $block->getChildBlock('post');
 
 ?>
-<?php if (!$collection->count()): ?>
+<?php if (!$collection->getTotalCount()): ?>
     <p>There are no posts in this blog.</p>
 <?php else: ?>
     <?php foreach ($collection as $post): ?>

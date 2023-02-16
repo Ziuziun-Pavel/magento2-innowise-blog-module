@@ -129,7 +129,7 @@ class PostRepository implements PostRepositoryInterface
         return $this->delete($this->getById($postId));
     }
 
-    public function getList(SearchCriteriaInterface $searchCriteria): PostSearchResultsInterface
+    public function getList(SearchCriteriaInterface $searchCriteria): PostSearchResultsInterface|\Magento\Framework\Api\SearchResults
     {
         $collection = $this->collectionFactory->create();
 

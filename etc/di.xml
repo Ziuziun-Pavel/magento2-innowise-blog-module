@@ -12,6 +12,7 @@
                 type="Magento\Framework\Api\SearchResults"/>
     <preference for="Innowise\Blog\Api\CategoryRepositoryInterface"
                 type="Innowise\Blog\Model\ResourceModel\Category\CategoryRepository"/>
+    <preference for="Magento\Theme\Block\Html\Pager" type="Innowise\Blog\Block\Html\CustomPager"/>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>

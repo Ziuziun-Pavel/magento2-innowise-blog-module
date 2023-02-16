@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Innowise\Blog\Service;
 
-use Innowise\Blog\Model\ResourceModel\Category\Collection;
-use Innowise\Blog\Model\ResourceModel\Category\CollectionFactory;
-use Magento\Framework\DB\Select;
+use Innowise\Blog\Api\CategoryRepositoryInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Innowise\Blog\Api\Data\CategorySearchResultsInterface;
 
 class CategoriesProvider
 {
-    public function __construct(private CollectionFactory $collectionFactory) {}
+    public function __construct(
+        private CategoryRepositoryInterface $categoryRepository,
+        private SearchCriteriaBuilder $searchCriteriaBuilder,
+    ) {}
 
-    public function getCategories(): Collection
+    public function getCategories(): CategorySearchResultsInterface|\Magento\Framework\Api\SearchResults
     {
-        $collection = $this->getCollection();
-        $collection->setOrder('created_at', Select::SQL_DESC);
+        $searchCriteria = $this->searchCriteriaBuilder->create();
+        $searchResults = $this->categoryRepository->getList($searchCriteria);
+        $categories = $searchResults;
 
-        return $collection;
+        return $categories;
     }
-
-    private function getCollection(): Collection
-    {
-        return $this->collectionFactory->create();
-    }
-
 }
