@@ -11,13 +11,13 @@ $post = $block->getData('post');
 
 <div class="post-wrapper">
     <a href="<?= $postViewModel->getPostUrl($post); ?>">
-        <h3><?= $post->getData('title'); ?></h3>
+        <h3><?= $block->escapeHtml($post->getData('title')); ?></h3>
     </a>
     <p>
         <span class="author">Pavel Ziuziun</span>
-        <span class="published-date"><?= $block->formatDate($post->getData('created_at')); ?></span>
+        <span class="published-date"><?= $block->escapeHtml($block->formatDate($post->getData('created_at'))); ?></span>
     </p>
-    <p><?= $post->getData('content'); ?></p>
+    <p><?= $block->escapeHtml($post->getData('content')); ?></p>
 </div>
 
 

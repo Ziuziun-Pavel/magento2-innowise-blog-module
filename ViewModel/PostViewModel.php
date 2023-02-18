@@ -11,16 +11,11 @@ use Innowise\Blog\Model\Post;
 use Magento\Framework\UrlInterface;
 class PostViewModel implements ArgumentInterface
 {
-    private $postRepositoryInterface;
-    private $requestInterface;
     public function __construct(
-        PostRepositoryInterface $postRepositoryInterface,
-        RequestInterface $requestInterface,
+        private PostRepositoryInterface $postRepositoryInterface,
+        private RequestInterface $requestInterface,
         private UrlInterface $url
-    ) {
-        $this->postRepositoryInterface = $postRepositoryInterface;
-        $this->requestInterface = $requestInterface;
-    }
+    ) { }
 
     public function getPost()
     {
