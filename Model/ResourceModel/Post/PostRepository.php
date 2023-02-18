@@ -87,19 +87,15 @@ class PostRepository implements PostRepositoryInterface
         $this->dataObjectProcessor = $dataObjectProcessor;
     }
 
-    public function getByUrlKey(string $url_key): int
+    public function getByUrlKey(string $urlKey): ?PostInterface
     {
-        $searchCriteria = $this->searchCriteriaBuilder->create();
-        $posts = $this->getList($searchCriteria);
-
-        foreach ($posts->getItems() as $post) {
-            if ($post->getUrlKey() == $url_key) {
-                return $post->getPostId();
-            }
+        $post = $this->postInterfaceFactory->create();
+        $this->postResource->load($post, $urlKey, 'url_key');
+        if (!$post->getId()) {
+            throw new NoSuchEntityException(__('The post with the "%1" URL key doesn\'t exist.', $urlKey));
         }
-        throw new NoSuchEntityException(__('Unable to find entity with ID "%1"', $url_key));
+        return $post;
     }
-
 
     public function getById(int $postId): PostInterface
     {

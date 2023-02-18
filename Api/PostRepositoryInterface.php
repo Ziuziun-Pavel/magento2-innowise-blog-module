@@ -31,11 +31,12 @@ interface PostRepositoryInterface
     public function getById(int $postId): PostInterface;
 
     /**
+     * Get post by URL key
      * @param string $url_key
-     * @return int
+     * @return PostInterface|null
      * @throws NoSuchEntityException
      */
-    public function getByUrlKey(string $url_key): int;
+    public function getByUrlKey(string $url_key): ?PostInterface;
 
     /**
      * Retrieve posts matching the specified criteria.

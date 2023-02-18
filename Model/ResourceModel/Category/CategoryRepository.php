@@ -97,6 +97,16 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $this->registry[$categoryId];
     }
 
+    public function getByUrlKey(string $urlKey): ?CategoryInterface
+    {
+        $post = $this->categoryInterfaceFactory->create();
+        $this->categoryResource->load($post, $urlKey, 'url_key');
+        if (!$post->getId()) {
+            throw new NoSuchEntityException(__('The category with the "%1" URL key doesn\'t exist.', $urlKey));
+        }
+        return $post;
+    }
+
     public function save(CategoryInterface $category): CategoryInterface
     {
         try {

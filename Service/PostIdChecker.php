@@ -3,19 +3,24 @@ declare(strict_types=1);
 
 namespace Innowise\Blog\Service;
 
+use Innowise\Blog\Api\Data\PostInterface;
 use Innowise\Blog\Api\PostRepositoryInterface;
-use Innowise\Blog\Model\ResourceModel\Post\Post;
 
 class PostIdChecker
 {
     public function __construct(
-        private PostRepositoryInterface $postRepositoryInterface
+        private PostRepositoryInterface $postRepository
     )
     { }
 
     public function checkUrlKey(string $urlKey): int
     {
-        var_dump($this->postRepositoryInterface->getByUrlKey($urlKey));
-        return $this->postRepositoryInterface->getByUrlKey($urlKey);
+        $post = $this->postRepository->getByUrlKey($urlKey);
+
+        if ($post instanceof PostInterface) {
+            return (int) $post->getId();
+        }
+
+        return 0;
     }
 }

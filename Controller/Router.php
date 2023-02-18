@@ -7,6 +7,8 @@ use Innowise\Blog\Service\PostIdChecker;
 use Magento\Framework\App\Action\Forward;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Url;
+
 class Router implements \Magento\Framework\App\RouterInterface
 {
     public function __construct(
@@ -19,7 +21,6 @@ class Router implements \Magento\Framework\App\RouterInterface
     {
         $pathInfo = trim($request->getPathInfo(), '/');
         $parts = explode('/', $pathInfo);
-        var_dump($pathInfo);
 
         if (!empty($parts[0]) && $parts[0] === 'blog' && !empty($parts[1])) {
            $urlKey = $parts[1];
@@ -38,8 +39,8 @@ class Router implements \Magento\Framework\App\RouterInterface
             ->setActionName('view')
             ->setParam('post_id', $postId);
 
-//        $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $pathInfo);
-        $request->setPathInfo($urlKey);
+        $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $pathInfo);
+        $request->setPathInfo($pathInfo);
 
         return $this->actionFactory->create(Forward::class);
     }
