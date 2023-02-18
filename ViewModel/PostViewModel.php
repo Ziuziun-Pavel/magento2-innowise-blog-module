@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Innowise\Blog\ViewModel;
 
 use Innowise\Blog\Api\PostRepositoryInterface;
+use Innowise\Blog\Model\Category;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Innowise\Blog\Model\Post;
@@ -26,6 +27,6 @@ class PostViewModel implements ArgumentInterface
 
     public function getPostUrl(Post $post): string
     {
-        return $this->url->getBaseUrl() . 'blog/' . $post->getData('url_key');
+        return $this->url->getBaseUrl() . 'blog/' . $post->getData('url_key') . '/';
     }
 }

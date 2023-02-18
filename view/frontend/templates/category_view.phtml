@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @var Magento\Framework\View\Element\Template $block
+ * @var Innowise\Blog\ViewModel\CategoryViewModel $categoryViewModel
+ */
+$categoryViewModel = $block->getData('category_view_model');
+$category = $categoryViewModel->getCategory();
+
+$postsViewModel = $block->getData('posts_view_model');
+$collection = $categoryViewModel->getCategoryPosts();
+$postBlock = $block->getChildBlock('post');
+$pagerBlock = $block->getChildBlock('blog_pager');
+
+?>
+<div class="blog_post_view">
+    <h1><?= $block->escapeHtml($category->getTitle()) ?></h1>
+    <p><em>Posts: </em></p>
+    <?php if (!$collection->getTotalCount()): ?>
+        <p>There are no posts in this category.</p>
+    <?php else: ?>
+        <?php foreach ($collection->getItems() as $post): ?>
+            <?= $categoryViewModel->getPostHtml($postBlock, $post, true); ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+</div>
