@@ -9,7 +9,7 @@ class CustomPager extends Pager
     /**
      * @var \Innowise\Blog\Api\Data\PostSearchResultsInterface
      */
-    protected $collection;
+    protected $postSearchResults;
 
     public function __construct(
         Context $context,
@@ -18,16 +18,26 @@ class CustomPager extends Pager
         parent::__construct($context, $data);
     }
 
+    public function setPostSearchResults($postSearchResults)
+    {
+        $this->postSearchResults = $postSearchResults;
+        return $this;
+    }
+
+    public function getPostSearchResults()
+    {
+        return $this->postSearchResults;
+    }
+
     /**
      * Set the collection for the pager.
      *
-     * @param \Innowise\Blog\Api\Data\PostSearchResultsInterface $collection
+     * @param \Innowise\Blog\Api\Data\PostSearchResultsInterface $postSearchResults
      * @return $this
      */
-    public function setCollection($collection)
+    public function setCollection($postSearchResults)
     {
-        $this->collection = $collection;
-        return $this;
+        return $this->setPostSearchResults($postSearchResults);
     }
 
     /**
@@ -37,18 +47,7 @@ class CustomPager extends Pager
      */
     public function getCollection()
     {
-        return $this->collection;
-    }
-
-    /**
-     * Override the toHtml method to use a custom template.
-     *
-     * @return string
-     */
-    public function toHtml()
-    {
-        $this->setTemplate('Innowise_Blog::custom_pager.phtml');
-        return parent::toHtml();
+        return $this->getPostSearchResults();
     }
 
     /**

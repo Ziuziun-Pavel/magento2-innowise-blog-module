@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Innowise\Blog\ViewModel;
 
+use Innowise\Blog\Block\Html\CustomPager;
 use Innowise\Blog\Service\PostsProvider;
 use Innowise\Blog\Model\Post;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magento\Theme\Block\Html\Pager;
 use Magento\Framework\View\Element\Template;
 
 class Posts implements ArgumentInterface
@@ -29,7 +29,7 @@ class Posts implements ArgumentInterface
         return (int) $this->request->getParam('p');
     }
 
-    public function getPager($collection, Pager $pagerBlock): string
+    public function getPager($collection, CustomPager $pagerBlock): string
     {
         $pagerBlock->setUseContainer(false)
             ->setShowPerPage(false)

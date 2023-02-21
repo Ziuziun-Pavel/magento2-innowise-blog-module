@@ -39,7 +39,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                     ->setParam('category_id', $categoryId);
 
                 // Remove 'blog' and category URL key from the path info
-                $pathInfo = substr($pathInfo, strlen('blog') + strlen($parts[1]) + 2);
+                $pathInfo = substr($pathInfo, strlen('blog') + strlen($parts[1]));
                 $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $pathInfo);
                 $request->setPathInfo($pathInfo);
 
@@ -57,7 +57,7 @@ class Router implements \Magento\Framework\App\RouterInterface
                     ->setParam('post_id', $postId);
 
                 // Remove 'blog' and post URL key from the path info
-                $pathInfo = substr($pathInfo, strlen('blog') + strlen($parts[1]) + 2);
+                $pathInfo = substr($pathInfo, strlen('blog') + strlen($parts[1]));
                 $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $pathInfo);
                 $request->setPathInfo($pathInfo);
 
