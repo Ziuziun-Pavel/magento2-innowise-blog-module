@@ -31,6 +31,7 @@ class CustomPager extends Pager
 
     /**
      * Set the collection for the pager.
+     * We don't use it in custom_pager.phtml
      *
      * @param \Innowise\Blog\Api\Data\PostSearchResultsInterface $postSearchResults
      * @return $this
@@ -42,6 +43,7 @@ class CustomPager extends Pager
 
     /**
      * Get the collection for the pager.
+     * We don't use it in custom_pager.phtml
      *
      * @return \Innowise\Blog\Api\Data\PostSearchResultsInterface
      */
