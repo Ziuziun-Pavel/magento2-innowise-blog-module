@@ -33,12 +33,12 @@ class CustomPager extends Pager
      * Set the collection for the pager.
      * We don't use it in custom_pager.phtml
      *
-     * @param \Innowise\Blog\Api\Data\PostSearchResultsInterface $postSearchResults
+     * @param \Magento\Framework\Data\Collection $collection
      * @return $this
      */
-    public function setCollection($postSearchResults)
+    public function setCollection($collection)
     {
-        return $this->setPostSearchResults($postSearchResults);
+        return $this->setPostSearchResults($collection);
     }
 
     /**
