@@ -63,7 +63,31 @@ class Save extends AbstractPost
                     ? $this->postRepository->getById($postId)
                     : $this->postFactory->create();
 
-                $this->dataObjectHelper->populateWithArray($model, $data, PostInterface::POST_ID);
+                $modelTags = $model->getTags();
+                $modelCategoryIds = $model->getCategoryIds();
+                $modelStoreIds = $model->getStoreIds();
+
+                $dataTags = $data['tags'];
+                $dataCategoryIds = $data['category_ids'];
+                $dataStoreIds = $data['store_ids'];
+
+                if ($modelTags !== $dataTags) {
+                    $model->setTags($dataTags);
+                } if ($modelCategoryIds !== $dataCategoryIds) {
+                    $model->setCategoryIds($dataCategoryIds);
+                }
+                    $model->setStoreIds($dataStoreIds);
+                unset($data['form_key']);
+
+
+//                print_r($model->getData());
+//                    print_r($data);
+
+                try {
+                    $this->dataObjectHelper->populateWithArray($model, $data, PostInterface::POST_ID);
+                } catch (\Exception $e) {
+                    echo $e->getMessage(); // print out any error messages or exception stack traces
+                }
                 $this->postRepository->save($model);
                 $this->dataPersistor->clear(self::DATA_PERSISTOR_KEY);
                 $this->messageManager->addSuccessMessage(__('You saved the item.'));
