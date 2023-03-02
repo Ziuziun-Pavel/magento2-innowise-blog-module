@@ -11,8 +11,6 @@ use Innowise\Blog\Api\Data\CategorySearchResultsInterface;
 use Innowise\Blog\Api\Data\CategorySearchResultsInterfaceFactory;
 use Innowise\Blog\Model\Category as CategoryModel;
 use Innowise\Blog\Model\ResourceModel\Category\Category as CategoryResourceModel;
-use Innowise\Blog\Model\ResourceModel\Category\Collection as CategoryCollection;
-use Innowise\Blog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
@@ -72,7 +70,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         DataObjectHelper $dataObjectHelper,
         JoinProcessorInterface $extensionAttributesJoinProcessor,
         CollectionProcessorInterface $collectionProcessor,
-        DataObjectProcessor $dataObjectProcessor
+        DataObjectProcessor $dataObjectProcessor,
     ) {
         $this->searchResultsFactory = $searchResultsFactory;
         $this->categoryResource = $categoryResource;
@@ -97,6 +95,16 @@ class CategoryRepository implements CategoryRepositoryInterface
         }
 
         return $this->registry[$categoryId];
+    }
+
+    public function getByUrlKey(string $urlKey): ?CategoryInterface
+    {
+        $post = $this->categoryInterfaceFactory->create();
+        $this->categoryResource->load($post, $urlKey, 'url_key');
+        if (!$post->getId()) {
+            throw new NoSuchEntityException(__('The category with the "%1" URL key doesn\'t exist.', $urlKey));
+        }
+        return $post;
     }
 
     public function save(CategoryInterface $category): CategoryInterface
@@ -130,7 +138,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $this->delete($this->getById($categoryId));
     }
 
-    public function getList(SearchCriteriaInterface $searchCriteria): CategorySearchResultsInterface
+    public function getList(SearchCriteriaInterface $searchCriteria):  CategorySearchResultsInterface|\Magento\Framework\Api\SearchResults
     {
         $collection = $this->collectionFactory->create();
 

@@ -1,0 +1,23 @@
+<?php
+/** @var $block Template */
+/** @var $postsViewModel \Innowise\Blog\ViewModel\Posts */
+
+use Magento\Framework\View\Element\Template;
+
+$postsViewModel = $block->getData('posts_view_model');
+$collection = $postsViewModel->getPosts(2);
+$pagerBlock = $block->getChildBlock('blog_pager');
+
+$postBlock = $block->getChildBlock('post');
+
+?>
+<?php if (!$collection->getTotalCount()): ?>
+    <p>There are no posts in this blog.</p>
+<?php else: ?>
+    <?php foreach ($collection->getItems() as $post): ?>
+        <?= $postsViewModel->getPostHtml($postBlock, $post, true); ?>
+    <?php endforeach; ?>
+    <?php if ($pagerBlock): ?>
+        <?= $postsViewModel->getPager($collection, $pagerBlock) ?>
+    <?php endif; ?>
+<?php endif; ?>

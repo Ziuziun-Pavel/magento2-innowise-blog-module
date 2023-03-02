@@ -1,0 +1,31 @@
+<?php
+/** @var $block Template */
+/** @var $postsViewModel \Innowise\Blog\ViewModel\Posts */
+
+use Magento\Framework\View\Element\Template;
+
+?>
+
+<?php if ($block->getLastPageNum() > 1): ?>
+    <div class="pager">
+        <nav class="pages">
+            <ul class="pagination">
+                <?php if ($block->getCurrentPage() > 1): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?php echo $block->escapeHtml($block->getPagerUrl(['p' => $block->getCurrentPage()-1])) ?>">Previous</a>
+                    </li>
+                <?php endif; ?>
+                <?php for ($i=1; $i<=$block->getLastPageNum(); $i++): ?>
+                    <li class="page-item<?= $i == $block->getCurrentPage() ? ' active' : '' ?>">
+                        <a class="page-link" href="<?php echo $block->escapeHtml($block->getPagerUrl(['p' => $i])) ?>"><?= $block->escapeHtml($i) ?></a>
+                    </li>
+                <?php endfor; ?>
+                <?php if ($block->getCurrentPage() < $block->getLastPageNum()): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?php echo $block->escapeHtml($block->getPagerUrl(['p' => $block->getCurrentPage()+1])) ?>">Next</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </div>
+<?php endif; ?>

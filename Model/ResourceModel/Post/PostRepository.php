@@ -15,6 +15,7 @@ use Innowise\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Innowise\Blog\Model\ResourceModel\Post\Post as PostResourceModel;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
+use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
@@ -72,7 +73,9 @@ class PostRepository implements PostRepositoryInterface
         DataObjectHelper $dataObjectHelper,
         JoinProcessorInterface $extensionAttributesJoinProcessor,
         CollectionProcessorInterface $collectionProcessor,
-        DataObjectProcessor $dataObjectProcessor
+        DataObjectProcessor $dataObjectProcessor,
+        private SearchCriteriaBuilder $searchCriteriaBuilder
+
     ) {
         $this->searchResultsFactory = $searchResultsFactory;
         $this->postResource = $postResource;
@@ -82,6 +85,16 @@ class PostRepository implements PostRepositoryInterface
         $this->extensionAttributesJoinProcessor = $extensionAttributesJoinProcessor;
         $this->collectionProcessor = $collectionProcessor;
         $this->dataObjectProcessor = $dataObjectProcessor;
+    }
+
+    public function getByUrlKey(string $urlKey): ?PostInterface
+    {
+        $post = $this->postInterfaceFactory->create();
+        $this->postResource->load($post, $urlKey, 'url_key');
+        if (!$post->getId()) {
+            throw new NoSuchEntityException(__('The post with the "%1" URL key doesn\'t exist.', $urlKey));
+        }
+        return $post;
     }
 
     public function getById(int $postId): PostInterface
@@ -129,7 +142,7 @@ class PostRepository implements PostRepositoryInterface
         return $this->delete($this->getById($postId));
     }
 
-    public function getList(SearchCriteriaInterface $searchCriteria): PostSearchResultsInterface
+    public function getList(SearchCriteriaInterface $searchCriteria): PostSearchResultsInterface|\Magento\Framework\Api\SearchResults
     {
         $collection = $this->collectionFactory->create();
 

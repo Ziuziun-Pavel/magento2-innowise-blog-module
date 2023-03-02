@@ -31,13 +31,21 @@ interface PostRepositoryInterface
     public function getById(int $postId): PostInterface;
 
     /**
+     * Get post by URL key
+     * @param string $url_key
+     * @return PostInterface|null
+     * @throws NoSuchEntityException
+     */
+    public function getByUrlKey(string $url_key): ?PostInterface;
+
+    /**
      * Retrieve posts matching the specified criteria.
      *
      * @param SearchCriteriaInterface $searchCriteria
      * @return PostSearchResultsInterface
      * @throws LocalizedException
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): Data\PostSearchResultsInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria): PostSearchResultsInterface|\Magento\Framework\Api\SearchResults;
 
     /**
      * Delete post.

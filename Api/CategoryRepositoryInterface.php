@@ -31,13 +31,22 @@ interface CategoryRepositoryInterface
     public function getById(int $categoryId): CategoryInterface;
 
     /**
+     * Get post by URL key
+     * @param string $url_key
+     * @return CategoryInterface|null
+     * @throws NoSuchEntityException
+     */
+    public function getByUrlKey(string $url_key): ?CategoryInterface;
+
+    /**
      * Retrieve categories matching the specified criteria.
      *
      * @param SearchCriteriaInterface $searchCriteria
      * @return CategorySearchResultsInterface
      * @throws LocalizedException
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): Data\CategorySearchResultsInterface;
+
+    public function getList(SearchCriteriaInterface $searchCriteria):  CategorySearchResultsInterface|\Magento\Framework\Api\SearchResults;
 
     /**
      * Delete category.

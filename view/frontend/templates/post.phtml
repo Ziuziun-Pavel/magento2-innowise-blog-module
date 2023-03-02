@@ -1,0 +1,23 @@
+<?php
+use Innowise\Blog\Model\Post;
+use Magento\Framework\View\Element\Template;
+
+/** @var Post $post */
+/** @var Template $block */
+$postViewModel = $block->getData('post_view_model');
+$post = $block->getData('post');
+
+?>
+
+<div class="post-wrapper">
+    <a href="<?= $postViewModel->getPostUrl($post); ?>">
+        <h3><?= $block->escapeHtml($post->getData('title')); ?></h3>
+    </a>
+    <p>
+        <span class="author">Pavel Ziuziun</span>
+        <span class="published-date"><?= $block->escapeHtml($block->formatDate($post->getData('created_at'))); ?></span>
+    </p>
+    <p><?= $block->escapeHtml($post->getData('content')); ?></p>
+</div>
+
+

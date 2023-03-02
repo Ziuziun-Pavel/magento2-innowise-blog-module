@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var Magento\Framework\View\Element\Template $block
+ * @var Innowise\Blog\ViewModel\CategoryViewModel $categoryViewModel
+ */
+$categoryViewModel = $block->getData('category_view_model');
+$categories = $categoryViewModel->getCategories();
+?>
+
+<nav class="navigation" data-action="navigation">
+    <ul id="menu"
+        data-mage-init='{"menu":{"responsive":true, "expanded":true, "delay": 200, "position":{"my":"left top","at":"left+10 top+30"}}}'>
+        <li class="level0 level-top ui-menu-item">
+            <a class="level-top ui-corner-all" id="ui-id-8" tabindex="-1" role="menuitem"
+               href="<?php echo $block->getUrl('blog/'); ?>">
+                <?php echo $block->escapeHtml(__('All posts')); ?>
+            </a>
+        </li>
+        <li class="level0 level-top parent ui-menu-item"><?php echo $block->escapeHtml(__('Categories')); ?> &#9658
+        </li>
+
+        <?php foreach ($categories->getItems() as $category): ?>
+            <li class="level0 level-top parent ui-menu-item">
+                <a class="level-top"
+                   href="<?= $categoryViewModel->getCategoryUrl($category); ?>">
+                    <?php echo $block->escapeHtml($category->getTitle()); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</nav>

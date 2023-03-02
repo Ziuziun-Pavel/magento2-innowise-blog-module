@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @var Magento\Framework\View\Element\Template $block
+ * @var Innowise\Blog\ViewModel\PostViewModel $postViewModel
+ */
+$postViewModel = $block->getData('post_view_model');
+$post = $postViewModel->getPost();
+
+?>
+<div class="blog_post_view">
+    <h1><?= $block->escapeHtml($post->getTitle()) ?></h1>
+    <p><em><?= __('Created: %1', $block->escapeHtml($post->getCreatedAt())) ?></em></p>
+    <p><?= $block->escapeHtml($post->getContent()) ?></p>
+</div>
