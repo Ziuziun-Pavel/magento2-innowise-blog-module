@@ -199,6 +199,7 @@ class Post extends AbstractDb
 
         return $this;
     }
+
     protected function _afterLoad(\Magento\Framework\Model\AbstractModel $object)
     {
         if ($object->getId()) {

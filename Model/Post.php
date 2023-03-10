@@ -77,7 +77,7 @@ class Post extends AbstractModel implements PostInterface
 
     public function getStoreIds(): array
     {
-        return $this->getData(PostInterface::POST_STORE_IDS);
+        return explode(',', $this->getData(PostInterface::POST_STORE_IDS));
     }
 
     public function setStoreIds(array $storeIds): PostInterface
@@ -97,7 +97,7 @@ class Post extends AbstractModel implements PostInterface
 
     public function getCategoryIds(): array
     {
-        return $this->getData(PostInterface::POST_CATEGORY_IDS);
+        return explode(',', $this->getData(PostInterface::POST_CATEGORY_IDS));
     }
 
     public function setCategoryIds(array $categoryIds): PostInterface
@@ -107,7 +107,7 @@ class Post extends AbstractModel implements PostInterface
 
     public function getTags(): array
     {
-        return  $this->getData(PostInterface::POST_TAGS);
+        return  explode(',', $this->getData(PostInterface::POST_TAGS));
     }
 
     public function setTags(array $tags): PostInterface
