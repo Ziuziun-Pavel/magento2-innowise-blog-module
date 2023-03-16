@@ -10,14 +10,12 @@ use Innowise\Blog\Api\Data\PostSearchResultsInterface;
 use Innowise\Blog\Api\Data\PostSearchResultsInterfaceFactory;
 use Innowise\Blog\Api\PostRepositoryInterface;
 use Innowise\Blog\Model\Post as PostModel;
-use Innowise\Blog\Model\ResourceModel\Post\Collection as PostCollection;
-use Innowise\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Innowise\Blog\Model\ResourceModel\Post\Post as PostResourceModel;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
-use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -74,8 +72,6 @@ class PostRepository implements PostRepositoryInterface
         JoinProcessorInterface $extensionAttributesJoinProcessor,
         CollectionProcessorInterface $collectionProcessor,
         DataObjectProcessor $dataObjectProcessor,
-        private SearchCriteriaBuilder $searchCriteriaBuilder
-
     ) {
         $this->searchResultsFactory = $searchResultsFactory;
         $this->postResource = $postResource;
@@ -114,10 +110,6 @@ class PostRepository implements PostRepositoryInterface
     public function save(PostInterface $post): PostInterface
     {
         try {
-//            var_dump($post->getCategoryIds());
-//            var_dump($post->getStoreIds());
-//            var_dump($post->getTags());
-
             $this->postResource->save($post);
             $this->registry[$post->getId()] = $post;
         } catch (\Exception $exception) {
