@@ -107,14 +107,43 @@
                 </item>
             </argument>
         </field>
-        <field name="content">
+        <field name="content" template="ui/form/field">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Content</item>
+                    <item name="label" xsi:type="string" translate="true">Full Content</item>
                     <item name="visible" xsi:type="boolean">true</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
                     <item name="dataScope" xsi:type="string">content</item>
+                    <item name="source" xsi:type="string">blog_posts</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </field>
+        <field name="store_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Store Ids</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">store_ids</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="tags">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Innowise\Blog\Model\Source\Tags</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Tags</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="dataScope" xsi:type="string">tags</item>
                     <item name="source" xsi:type="string">blog_posts</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
@@ -123,39 +152,6 @@
                 </item>
             </argument>
         </field>
-<!--        <field name="store_ids">-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="dataType" xsi:type="string">int</item>-->
-<!--                    <item name="label" xsi:type="string" translate="true">Store Ids</item>-->
-<!--                    <item name="formElement" xsi:type="string">multiselect</item>-->
-<!--                    <item name="source" xsi:type="string">post</item>-->
-<!--                    <item name="dataScope" xsi:type="string">store_ids</item>-->
-<!--                    <item name="default" xsi:type="string">0</item>-->
-<!--                    <item name="validation" xsi:type="array">-->
-<!--                        <item name="required-entry" xsi:type="boolean">true</item>-->
-<!--                    </item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--        </field>-->
-<!--        <field name="tags">-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="options" xsi:type="object">Innowise\Blog\Model\Source\Tags</item>-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="label" xsi:type="string" translate="true">Tags</item>-->
-<!--                    <item name="visible" xsi:type="boolean">true</item>-->
-<!--                    <item name="dataType" xsi:type="string">int</item>-->
-<!--                    <item name="formElement" xsi:type="string">multiselect</item>-->
-<!--                    <item name="dataScope" xsi:type="string">tags</item>-->
-<!--                    <item name="source" xsi:type="string">blog_posts</item>-->
-<!--                    <item name="validation" xsi:type="array">-->
-<!--                        <item name="required-entry" xsi:type="boolean">true</item>-->
-<!--                    </item>-->
-<!--                    <item name="sortOrder" xsi:type="number">40</item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--        </field>-->
         <field name="category_ids">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Innowise\Blog\Model\Source\Categories</item>
