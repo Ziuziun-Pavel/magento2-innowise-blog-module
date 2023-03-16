@@ -137,7 +137,7 @@
         </field>
         <field name="tags">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Innowise\Blog\Model\Source\Categories</item>
+                <item name="options" xsi:type="object">Innowise\Blog\Model\Source\Tags</item>
                 <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string" translate="true">Tags</item>
                     <item name="visible" xsi:type="boolean">true</item>

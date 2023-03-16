@@ -3,6 +3,7 @@
 namespace Innowise\Blog\Model\Source;
 
 use Innowise\Blog\Model\ResourceModel\Post\CollectionFactory;
+use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Option\ArrayInterface;
 
 class Tags implements ArrayInterface
@@ -14,10 +15,17 @@ class Tags implements ArrayInterface
      */
     protected $options;
 
+    /**
+     * @var ResourceConnection
+     */
+    protected $resource;
+
     public function __construct(
-        CollectionFactory $collectionFactory
+        CollectionFactory $collectionFactory,
+        ResourceConnection $resource
     ) {
         $this->collectionFactory = $collectionFactory;
+        $this->resource = $resource;
     }
 
     public function toOptionArray()
@@ -35,7 +43,14 @@ class Tags implements ArrayInterface
 
     public function getOptions()
     {
-        $data = $this->collectionFactory->create();
-        return $data->getData();
+        $connection = $this->resource->getConnection();
+        $tableName = $this->resource->getTableName('innowise_blog_tag');
+        $postTagsTable = $this->resource->getTableName('innowise_blog_post_tags');
+        $select = $connection->select()
+            ->from(['t' => $tableName], ['tag_id', 'name'])
+            ->joinLeft(['pt' => $postTagsTable], 'pt.tag_id = t.tag_id', [])
+            ->group('t.tag_id')
+            ->order('name', 'ASC');
+        return $connection->fetchAll($select);
     }
 }

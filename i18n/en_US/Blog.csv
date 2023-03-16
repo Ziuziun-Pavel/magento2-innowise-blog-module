@@ -1,0 +1,77 @@
+Posts, Posts
+Categories, Categories
+"Add Post","Add Post"
+Back,Back
+"Edit", "Edit"
+"Delete","Delete"
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Reset,Reset
+"Save and Continue Edit","Save and Continue Edit"
+"Save Post","Save Post"
+ID,ID
+Title,Title
+Store IDs, Store IDs
+Category IDs, Category IDs
+Tags, Tags
+Status,Status
+Disabled,Disabled
+Enabled,Enabled
+"Manage Posts","Manage Posts"
+"Add New Post","Add New Post"
+"Delete Post","Delete Post"
+"Save Post","Save Post"
+"URL Key","URL Key"
+Layout,Layout
+"Store View","Store View"
+Created,Created
+Modified,Modified
+Actions,Actions
+Home,Home
+"Go to Home Page","Go to Home Page"
+"You deleted the post.","You deleted the post."
+"We can't find a category to delete.","We can't find a category to delete."
+"This category no longer exists.","This category no longer exists."
+"Edit Category","Edit Category"
+"New Category","New Category"
+Categories,Categories
+"Please correct the data sent.","Please correct the data sent."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"You saved the category.","You saved the category."
+"Something went wrong while saving the category.","Something went wrong while saving the category."
+"The page has been deleted.","The page has been deleted."
+"We can't find a page to delete.","We can't find a page to delete."
+"This post no longer exists.","This post no longer exists."
+"Edit Post","Edit Post"
+"New Post","New Post"
+Posts,Posts
+"Something went wrong while saving the post.","Something went wrong while saving the post."
+"A total of %1 record(s) have been disabled.","A total of %1 record(s) have been disabled."
+"A total of %1 record(s) have been enabled.","A total of %1 record(s) have been enabled."
+"Post Title","Post Title"
+"You saved the post.","You saved the post."
+"Enabled by Default","Enabled by Default"
+"Disabled by Default","Disabled by Default"
+"Disabled Completely","Disabled Completely"
+"Could not save the post: %1","Could not save the post: %1"
+"Could not delete the post: %1","Could not delete the post: %1"
+"Privacy and Cookie Policy","Privacy and Cookie Policy"
+LocalizedException,LocalizedException
+RuntimeException,RuntimeException
+Exception,Exception
+"Could not create a directory.","Could not create a directory."
+Edit,Edit
+Delete,Delete
+"Delete %1","Delete %1"
+"Are you sure you want to delete a %1 record?","Are you sure you want to delete a %1 record?"
+"All Store Views","All Store Views"
+"Are you sure you want to delete selected items?","Are you sure you want to delete selected items?"
+"Delete items","Delete items"
+Content,Content
+"Content Heading","Content Heading"
+"Search Engine Optimization","Search Engine Optimization"
+"Meta Title","Meta Title"
+"Meta Keywords","Meta Keywords"
+"Meta Description","Meta Description"
+From,From
+To,To
+"-- Please Select --","-- Please Select --"

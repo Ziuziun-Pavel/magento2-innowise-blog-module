@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 <page layout="2columns-right" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <referenceContainer name="header.container">
+            <block name="innowise_blog_nav"
+                   template="Innowise_Blog::nav_bar.phtml"
+                   cacheable="false">
+                <arguments>
+                    <argument name="category_view_model" xsi:type="object">Innowise\Blog\ViewModel\CategoryViewModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
         <referenceContainer name="main">
             <block name="blog.category.view" template="Innowise_Blog::/category_view.phtml">
                 <arguments>

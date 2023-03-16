@@ -29,7 +29,7 @@ class Post extends AbstractDb
     public function __construct(
         Context $context,
         DateTime $date,
-        LibDateTime $dateTime,
+        LibDateTime $dateTime
     ) {
         $this->dateTime = $dateTime;
         $this->date = $date;
@@ -199,6 +199,7 @@ class Post extends AbstractDb
 
         return $this;
     }
+
     protected function _afterLoad(\Magento\Framework\Model\AbstractModel $object)
     {
         if ($object->getId()) {

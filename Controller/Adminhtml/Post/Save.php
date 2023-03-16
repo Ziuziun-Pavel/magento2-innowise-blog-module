@@ -63,7 +63,12 @@ class Save extends AbstractPost
                     ? $this->postRepository->getById($postId)
                     : $this->postFactory->create();
 
-                $this->dataObjectHelper->populateWithArray($model, $data, PostInterface::POST_ID);
+
+                try {
+                    $this->dataObjectHelper->populateWithArray($model, $data, PostInterface::class);
+                } catch (\Exception $e) {
+                    var_dump($e->getMessage());
+                }
                 $this->postRepository->save($model);
                 $this->dataPersistor->clear(self::DATA_PERSISTOR_KEY);
                 $this->messageManager->addSuccessMessage(__('You saved the item.'));
@@ -92,4 +97,5 @@ class Save extends AbstractPost
 
         return $resultRedirect->setPath('*/*/');
     }
+
 }

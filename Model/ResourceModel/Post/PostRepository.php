@@ -114,6 +114,10 @@ class PostRepository implements PostRepositoryInterface
     public function save(PostInterface $post): PostInterface
     {
         try {
+//            var_dump($post->getCategoryIds());
+//            var_dump($post->getStoreIds());
+//            var_dump($post->getTags());
+
             $this->postResource->save($post);
             $this->registry[$post->getId()] = $post;
         } catch (\Exception $exception) {
